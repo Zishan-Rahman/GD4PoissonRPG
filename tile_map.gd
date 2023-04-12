@@ -14,7 +14,10 @@ func _ready():
 	for x in range(-50, x_tile_range + 50):
 		for y in range(-50, y_tile_range + 50):
 			set_cell(0, Vector2(x, y), 0, Vector2(0, 0))
+	var start_time: float = Time.get_ticks_msec()
 	cell_points = generate_points(point_radius, region_size, rejection_samples)
+	var new_time: float = Time.get_ticks_msec() - start_time
+	print("Time taken: " + str(new_time) + "ms")
 
 func generate_points(radius: float, sample_region_size: Vector2, number_of_samples_before_rejection: int = 30) -> Array[Vector2]:
 	var cell_size: float = radius / sqrt(2)
