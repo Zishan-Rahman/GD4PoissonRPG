@@ -97,7 +97,7 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 	for i in range(ceili(sample_region_size.x/cell_size)):
 		grid.append([])
 		for j in range(ceili(sample_region_size.y/cell_size)):
-			grid[i].append(-1)
+			grid[i].append(0)
 	
 	spawn_points.append(sample_region_size/2)
 	
@@ -132,7 +132,7 @@ func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float,
 		var search_end_y: int = min(cell_y + 2, y_tile_range - 1)
 		for x in range(search_start_x, search_end_x):
 			for y in range(search_start_y, search_end_y):
-				var point_index: int = grid[x][y]
+				var point_index: int = grid[x][y] - 1
 				if point_index != -1:
 					var distance: float = (candidate - points[point_index]).length_squared()
 					if distance < radius:
