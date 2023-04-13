@@ -94,6 +94,11 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 	var points: Array[Vector2] = []
 	var spawn_points: Array[Vector2] = []
 	
+	for i in range(ceili(sample_region_size.x/cell_size)):
+		grid.append([])
+		for j in range(ceili(sample_region_size.y/cell_size)):
+			grid[i].append(-1)
+	
 	spawn_points.append(sample_region_size/2)
 	
 	while spawn_points.size() > 0:
