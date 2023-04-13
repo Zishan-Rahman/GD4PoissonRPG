@@ -53,7 +53,7 @@ var y_tile_range: int = ProjectSettings.get_setting("display/window/size/viewpor
 var cell_points: Array[Vector2]
 @export var point_radius: float = 1.0
 @export var region_size: Vector2 = Vector2(x_tile_range, y_tile_range)
-@export var rejection_samples: int = 30
+@export_range(0, 50, 1) var rejection_samples: int = 8
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -88,15 +88,19 @@ func _physics_process(_delta):
 		set_cell(0, previous_cell, 0)
 		set_cell(0, player_placement_cell, 0, PLAYER_SPRITE)
 
+# ALGORITHM BEGINS HERE
+
 func generate_points(radius: float, sample_region_size: Vector2, number_of_samples_before_rejection: int = 30) -> Array[Vector2]:
 	var cell_size: float = radius / sqrt(2)
 	var grid: Array[Array] = []
 	var points: Array[Vector2] = []
 	var spawn_points: Array[Vector2] = []
+	var grid_x_axis_size: int = ceili(sample_region_size.x/cell_size)
+	var grid_y_axis_size: int = ceili(sample_region_size.y/cell_size)
 	
-	for i in range(ceili(sample_region_size.x/cell_size)):
+	for i in range(grid_x_axis_size):
 		grid.append([])
-		for j in range(ceili(sample_region_size.y/cell_size)):
+		for j in range(grid_y_axis_size):
 			grid[i].append(0)
 	
 	spawn_points.append(sample_region_size/2)
@@ -110,7 +114,7 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 			var angle: float = randf() * TAU # TAU = PI * 2
 			var direction: Vector2 = Vector2(sin(angle), cos(angle))
 			var candidate: Vector2 = spawn_centre + direction * randf_range(radius, 2 * radius)
-			if is_valid(candidate, sample_region_size, cell_size, radius, points, grid):
+			if is_valid(candidate, sample_region_size, cell_size, radius, points, grid, grid_x_axis_size, grid_y_axis_size):
 				points.append(candidate)
 				spawn_points.append(candidate)
 				grid[int(candidate.x/cell_size)][int(candidate.y/cell_size)] = len(points)
@@ -122,14 +126,14 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 			
 	return points
 
-func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float, radius: float, points: Array[Vector2], grid: Array[Array]):
+func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float, radius: float, points: Array[Vector2], grid: Array[Array], grid_x_axis_size: int, grid_y_axis_size: int):
 	if candidate.x >= 0 and candidate.x < sample_region_size.x and candidate.y >= 0 and candidate.y < sample_region_size.y:
 		var cell_x: int = candidate.x / cell_size
 		var cell_y: int = candidate.y / cell_size
 		var search_start_x: int = max(0, cell_x - 2)
-		var search_end_x: int = min(cell_x + 2, x_tile_range - 1)
+		var search_end_x: int = min(cell_x + 2, grid_x_axis_size - 1)
 		var search_start_y: int = max(0, cell_y - 2)
-		var search_end_y: int = min(cell_y + 2, y_tile_range - 1)
+		var search_end_y: int = min(cell_y + 2, grid_y_axis_size - 1)
 		for x in range(search_start_x, search_end_x):
 			for y in range(search_start_y, search_end_y):
 				var point_index: int = grid[x][y] - 1
