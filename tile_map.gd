@@ -30,7 +30,7 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 		var candidate_accepted: bool = false
 		
 		for i in range(number_of_samples_before_rejection):
-			var angle: float = randf_range(0.0, 1.0) * TAU # TAU = PI * 2
+			var angle: float = randf() * TAU # TAU = PI * 2
 			var direction: Vector2 = Vector2(sin(angle), cos(angle))
 			var candidate: Vector2 = spawn_centre + direction * randf_range(radius, 2 * radius)
 			if is_valid(candidate, sample_region_size, cell_size, radius, points, grid):
