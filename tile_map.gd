@@ -134,7 +134,7 @@ func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float,
 			for y in range(search_start_y, search_end_y):
 				var point_index: int = grid[x][y]
 				if point_index != -1:
-					var distance: float = (candidate - points[point_index]).length()
+					var distance: float = (candidate - points[point_index]).length_squared()
 					if distance < radius:
 						return false
 		return true
