@@ -125,7 +125,7 @@ func _physics_process(_delta) -> void:
 	var new_placement_cell: Vector2i = player_placement_cell + direction
 	if (not get_used_cells(0).has(new_placement_cell) or trees.has(get_cell_atlas_coords(0, new_placement_cell)) or new_placement_cell == ring_placement_cell) and _is_not_out_of_bounds(new_placement_cell):
 		player_placement_cell = new_placement_cell
-		set_cell(0, previous_cell, 0)
+		set_cell(0, previous_cell, 0) # deletes contents of previous cell (atlas_coords = Vector2i(-1, -1))
 		set_cell(0, player_placement_cell, 0, PLAYER_SPRITE)
 		if player_placement_cell == ring_placement_cell:
 			$WinDialog.visible = true
