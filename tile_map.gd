@@ -138,8 +138,8 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 
 func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float, radius: float, points: Array[Vector2], grid: Array[Array], grid_x_axis_size: int, grid_y_axis_size: int) -> bool:
 	if candidate.x >= 0 and candidate.x < sample_region_size.x and candidate.y >= 0 and candidate.y < sample_region_size.y:
-		var cell_x: int = candidate.x / cell_size
-		var cell_y: int = candidate.y / cell_size
+		var cell_x: int = roundi(candidate.x / cell_size)
+		var cell_y: int = roundi(candidate.y / cell_size)
 		var search_start_x: int = max(0, cell_x - 2)
 		var search_end_x: int = min(cell_x + 2, grid_x_axis_size - 1)
 		var search_start_y: int = max(0, cell_y - 2)
