@@ -1,6 +1,6 @@
 extends TileMap
 
-var buildings: Array[Vector2i] = [
+const buildings: Array[Vector2i] = [
 	Vector2i(0, 19),
 	Vector2i(1, 19),
 	Vector2i(2, 19),
@@ -29,7 +29,7 @@ var buildings: Array[Vector2i] = [
 	Vector2i(7, 21),
 	Vector2i(8, 21)
 ]
-var trees: Array[Vector2i] = [
+const trees: Array[Vector2i] = [
 	Vector2i(0,1),
 	Vector2i(1,1),
 	Vector2i(2,1),
@@ -77,7 +77,7 @@ func paint_points() -> void:
 func _get_player_placement_cell() -> Vector2i:
 	return Vector2i(randi() % x_tile_range, randi() % y_tile_range)
 
-func place_player():
+func place_player() -> void:
 	while get_used_cells(0).has(player_placement_cell):
 		player_placement_cell = _get_player_placement_cell()
 	set_cell(0, player_placement_cell, 0, PLAYER_SPRITE)
@@ -85,7 +85,7 @@ func place_player():
 func _is_not_out_of_bounds(cell: Vector2i) -> bool:
 	return cell.x >= 0 and cell.x < x_tile_range and cell.y >= 0 and cell.y < y_tile_range
 
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	var previous_cell: Vector2i = player_placement_cell
 	var direction: Vector2i = Vector2i.ZERO
 	if Input.is_action_pressed("ui_up"): direction = Vector2i.UP
@@ -136,7 +136,7 @@ func generate_points(radius: float, sample_region_size: Vector2, number_of_sampl
 			
 	return points
 
-func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float, radius: float, points: Array[Vector2], grid: Array[Array], grid_x_axis_size: int, grid_y_axis_size: int):
+func is_valid(candidate: Vector2, sample_region_size: Vector2, cell_size: float, radius: float, points: Array[Vector2], grid: Array[Array], grid_x_axis_size: int, grid_y_axis_size: int) -> bool:
 	if candidate.x >= 0 and candidate.x < sample_region_size.x and candidate.y >= 0 and candidate.y < sample_region_size.y:
 		var cell_x: int = candidate.x / cell_size
 		var cell_y: int = candidate.y / cell_size
