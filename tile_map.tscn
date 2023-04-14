@@ -1093,7 +1093,6 @@ sources/0 = SubResource("TileSetAtlasSource_j4usm")
 tile_set = SubResource("TileSet_8pb5m")
 format = 2
 script = ExtResource("2_iyhvf")
-rejection_samples = 17
 
 [node name="AcceptDialog" parent="." instance=ExtResource("3_bk3rg")]
 
