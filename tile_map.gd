@@ -61,7 +61,7 @@ var cell_points: Array[Vector2]
 @export_range(0.0, 1.0) var paint_building_probability: float = 0.125
 @export var point_radius: float = 1.0
 @export var region_size: Vector2 = Vector2(x_tile_range, y_tile_range)
-@export_range(0, 50, 1) var rejection_samples: int = 8
+@export_range(1, 50, 1) var rejection_samples: int = 8
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
