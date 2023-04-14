@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cau5jgogdnf53"]
+
+[node name="AcceptDialog" type="AcceptDialog"]
+title = "Tree-Munching Time!"
+position = Vector2i(326, 100)
+size = Vector2i(500, 421)
+mouse_passthrough = true
+ok_button_text = "Bring it on!"
+dialog_text = "You're a hollow Golem who seeks the ultimate treasure; a ring that's got something on top of it. It's somewhere in this large village and barely visible to your naked eyes, but you'll stop at nothing to get what you want. You can chow down every tree and fauna that stands in your way of the ring, but your Achilles heel is any bricks and mortar, which will make you stop at your tracks. Are you ready to attain your treasure?w Golem in a black-and-white world, in search for your most desired treasure. It's a ring with something on top of it. And you'll stop at nothing to get what you want. You can chow down every tree and fauna that stands in your way of the ring, but your Achilles heel is any bricks and mortar, which will make you stop at your tracks. Are you ready to attain the treasure that is rightfully yours?!"
+dialog_autowrap = true

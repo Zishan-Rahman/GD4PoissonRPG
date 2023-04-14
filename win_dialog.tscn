@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b5q8ovcigrvyr"]
+
+[node name="WinDialog" type="ConfirmationDialog"]
+title = "Tree-Munching Time!"
+position = Vector2i(326, 100)
+size = Vector2i(500, 421)
+mouse_passthrough = true
+ok_button_text = "Get Me a New Village"
+dialog_text = "You found your treasure! Well done, you!
+
+Would you like to travel to a new village in the hopes of finding another ring? Or would you like to take your treasure home now?"
+dialog_autowrap = true
+cancel_button_text = "Get Me Out of Here"
