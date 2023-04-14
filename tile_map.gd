@@ -51,6 +51,7 @@ var x_tile_range: int = ProjectSettings.get_setting("display/window/size/viewpor
 var y_tile_range: int = ProjectSettings.get_setting("display/window/size/viewport_height") / tile_set.tile_size.y
 
 var cell_points: Array[Vector2]
+@export_range(0.0, 1.0) var paint_building_probability: float = 0.125
 @export var point_radius: float = 1.0
 @export var region_size: Vector2 = Vector2(x_tile_range, y_tile_range)
 @export_range(0, 50, 1) var rejection_samples: int = 8
@@ -62,7 +63,16 @@ func _ready():
 	cell_points = generate_points(point_radius, region_size, rejection_samples)
 	var new_time: float = Time.get_ticks_msec() - start_time
 	print("Time taken: " + str(new_time) + "ms")
+	paint_points()
 	place_player()
+
+func paint_points() -> void:
+	for point in cell_points:
+		var cell_point: Vector2i = Vector2i(roundi(point.x), roundi(point.y))
+		if randf() < paint_building_probability:
+			set_cell(0, cell_point, 0, buildings.pick_random())
+		else:
+			set_cell(0, cell_point, 0, trees.pick_random())
 
 func _get_player_placement_cell() -> Vector2i:
 	return Vector2i(randi() % x_tile_range, randi() % y_tile_range)
