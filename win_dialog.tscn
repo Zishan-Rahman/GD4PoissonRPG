@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5q8ovcigrvyr"]
 
 [node name="WinDialog" type="ConfirmationDialog"]
-title = "Tree-Munching Time!"
+title = "You Found the Treasure!"
 position = Vector2i(326, 100)
 size = Vector2i(500, 421)
 mouse_passthrough = true
