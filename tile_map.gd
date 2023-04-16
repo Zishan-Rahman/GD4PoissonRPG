@@ -103,11 +103,13 @@ func _get_random_placement_cell() -> Vector2i:
 	return Vector2i(randi() % x_tile_range, randi() % y_tile_range)
 
 func place_player() -> void:
+	player_placement_cell = _get_random_placement_cell()
 	while get_used_cells(0).has(player_placement_cell):
 		player_placement_cell = _get_random_placement_cell()
 	set_cell(0, player_placement_cell, 0, PLAYER_SPRITE)
 
 func place_ring() -> void:
+	ring_placement_cell = _get_random_placement_cell()
 	while get_used_cells(0).has(ring_placement_cell):
 		ring_placement_cell = _get_random_placement_cell()
 	set_cell(0, ring_placement_cell, 0, rings.pick_random())
