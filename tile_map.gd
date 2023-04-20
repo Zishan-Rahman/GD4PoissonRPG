@@ -58,9 +58,13 @@ var x_tile_range: int = ProjectSettings.get_setting("display/window/size/viewpor
 var y_tile_range: int = ProjectSettings.get_setting("display/window/size/viewport_height") / tile_set.tile_size.y
 
 var cell_points: Array[Vector2]
+## The probability that a building gets painted at a cell in lieu of a tree. The higher this probability, the more likely a building tile gets painted instead of a tree tile.
 @export_range(0.0, 1.0) var paint_building_probability: float = 0.125
+## The radius value used to measure distances between points for the algorithm. The longer the radius, the further apart points are during the algorithm's processing, and the further apart painted cells are in the game.
 @export_range(0.5, 2.5) var point_radius: float = 1.0
+## The size of the region in which the algorithm is performed. Set to the "default" tile map size (72, 40) in the script, shown as (0, 0) in the Godot editor. Can be changed to use a smaller region for the algorithm itself, of course resulting in less cells covered within the boundaries set for this game, though the algorithm will perform faster due to less cells being checked.
 @export var region_size: Vector2 = Vector2(x_tile_range, y_tile_range)
+## The maximum number of times a cell is checked before it is ignored. A cell can be accepted and painted on before this maximum number is reached. The higher this value, the more times a cell is checked, therefore the higher the algorithm's processing time.
 @export_range(1, 50, 1) var rejection_samples: int = 8
 
 # Called when the node enters the scene tree for the first time.
